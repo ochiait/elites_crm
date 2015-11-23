@@ -45,5 +45,6 @@ group :development, :test do
   gem 'spring'
    gem 'faker'              # 本物っぽいテストデータの作成
   gem 'faker-japanese'     # 本物っぽいテストデータの作成（日本語対応）
+  gem 'rails-erd'
 end
 
