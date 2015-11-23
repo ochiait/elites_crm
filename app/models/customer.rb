@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  belongs_to :company
+
   def full_name(sama)
     full_name = family_name + given_name + sama
     return full_name
