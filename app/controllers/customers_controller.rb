@@ -6,10 +6,13 @@ class CustomersController < ApplicationController
     @customer = Customer.new
   end
 
-   def create
-    @customer = Customer.new(customer_params)
-    @customer.save
-    redirect_to @customer
+  def create
+    @comment = Comment.new(comment_params)
+    if @comment.save
+      redirect_to customer_url(@comment.customer_id)
+    else
+      redirect_to customer_url(@comment.customer_id)
+    end
   end
 
   def edit
@@ -33,5 +36,8 @@ class CustomersController < ApplicationController
       :given_name,
       :email
       )
+  end
+   def comment_params
+    params.require(:comment).permit(:body, :customer_id)
   end
 end
