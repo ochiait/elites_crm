@@ -3,34 +3,9 @@
     <h1>顧客詳細</h1>
     <dl>
       <dt>お名前</dt>
-      <dd><%= @customer.full_name %></dd>
+      <dd><%= @customer.full_name("様") %></dd>
       <dt>電子メール</dt>
       <dd><%= @customer.email %></dd>
     </dl>
   </div>
-</div>
-
-<hr />
-
-<div class="row">
-  <div class="col-lg-12">
-    <h2>対応履歴</h2>
-    <% @comments.each do |comment| %>
-      <div class="media">
-        <div class="media-body">
-          <p><%= simple_format(comment.body) %></p>
-          <p class="text-muted">
-            投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
-          </p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="media-body">
-  <p><%= simple_format(comment.body) %></p>
-  <p class="text-muted">
-    投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
-    <%= link_to "削除する", comment_path(comment), method: :delete %>
-  </p>
-</div>
 </div>
