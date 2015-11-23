@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   def index
+    @customers = Customer.all
   end
 
   def new
@@ -7,29 +8,37 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to customer_url(@comment.customer_id)
+    @customer = Customer.new(customer_params)
+    if @customer.save
+      redirect_to @customer
     else
-      redirect_to customer_url(@comment.customer_id)
+      render :new
     end
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to @customer
+    else
+      render :edit
+    end
   end
 
   def show
     @customer = Customer.find(params[:id])
-    @comment = Comment.new # これをform_forで使う
-     # @comments = Comment.where(customer_id: params[:id].to_i)
-    @comments = @customer.comments
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to customers_url
   end
+
   private
 
   def customer_params
@@ -39,7 +48,6 @@ class CustomersController < ApplicationController
       :email
       )
   end
-   def comment_params
-    params.require(:comment).permit(:body, :customer_id)
-  end
+
+
 end
